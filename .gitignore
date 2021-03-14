@@ -1,2 +1,7 @@
+# datasets
 review_polarity/
 opinion_lexicon/
+
+# temporary data
+.ipynb_checkpoints/
+
