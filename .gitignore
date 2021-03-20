@@ -5,3 +5,5 @@ opinion_lexicon/
 # temporary data
 .ipynb_checkpoints/
 
+# saved models
+*.joblib
