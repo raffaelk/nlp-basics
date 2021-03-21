@@ -20,13 +20,13 @@ from joblib import load
 def preprocess_review(string: str) -> List[str]:
     """Preprocess one movie review by performing tokenization, removal of
     non-alphabetical tokens and stopwords, lemmatization.
-    
+
     Args:
-        string: One movie review as a single string
-    
+        string: One movie review as a single string.
+
     Returns:
         A List of preprocessed tokens.
-    
+
     """
     # tokenize input
     tokens = word_tokenize(string.lower())
@@ -50,18 +50,24 @@ def dummy_tokenizer(text: str) -> str:
     return text
 
 
-vectorizer = load('vectorizer.joblib')
-clf = load('clf.joblib') 
+def predict(my_review: str) -> str:
+    """ Predict the sentiment of a single movie review.
 
+    Args:
+        my_review: One movie review as a single string.
 
-# my own review as a string
-my_review = "Bad! The actors weren't motivated to do a good job."
+    Returns:
+        Predicted sentiment of the review.
+    """
+    # load pre saved model
+    vectorizer = load('vectorizer.joblib')
+    clf = load('clf.joblib')
 
-# preprocess and predict sentiment
-my_review_pre = preprocess_review(my_review)
-my_review_tfidf = vectorizer.transform([my_review_pre])
-my_pred = clf.predict(my_review_tfidf)
+    # preprocess and predict sentiment
+    my_review_pre = preprocess_review(my_review)
+    my_review_tfidf = vectorizer.transform([my_review_pre])
+    my_pred = clf.predict(my_review_tfidf)
 
-sentiment = 'positive' if my_pred[0] else 'negative'
+    sentiment = 'positive' if my_pred[0] else 'negative'
 
-print(sentiment)
+    return sentiment

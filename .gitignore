@@ -7,3 +7,6 @@ opinion_lexicon/
 
 # saved models
 *.joblib
+
+# virtual environement
+vir_env/
