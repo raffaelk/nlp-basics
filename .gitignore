@@ -4,6 +4,7 @@ opinion_lexicon/
 
 # temporary data
 .ipynb_checkpoints/
+__pycache__/
 
 # saved models
 *.joblib
