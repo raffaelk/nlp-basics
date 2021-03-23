@@ -17,4 +17,5 @@ To productionize the logistic regression model, I built a simple flask API/GUI w
 - install the dependencies with `pip install -r requirements.txt`
 - run the api script: `python api_app.py`
 - go to http://localhost:5000/ in a webbrowser
+
 There is a textbox for an own movie review. After clicking on 'submit', the sentiment of the text will be predicted. As a test case real one and five star reviews from amazon can be evaluated. The underlying prdiction model is fairly simple, so it is also easy to trick it into giving a fals prediction. As only unigrams have been used, the model is not capable of analyzing the context of important words. E.g. the sentences *"The movie was not good."* and *"The movie was good."* will both be labelled as positive.
