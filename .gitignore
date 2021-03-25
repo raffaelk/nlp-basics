@@ -1,6 +1,7 @@
 # datasets
 review_polarity/
 opinion_lexicon/
+boydstun_nyt_frontpage_dataset_utf8.csv
 
 # temporary data
 .ipynb_checkpoints/
