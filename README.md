@@ -2,7 +2,7 @@
 This repo is a collection of a few small projects in Natural Language Processing (NLP). They started as part of a semster assignment of the NLP course of Ryan Cotterell at ETH Zürich. The code for my original hand-in is in a seperate [repo](https://github.com/raffaelk/NLP20_Assignment). Here I present an extended version of the original tasks, with some added features and documentation.
 
 ## Sentiment Classification of Movie Reviews
-The first project is to classify a collection of movie reviews, written in natural language, in either positive or negative sentiment.
+The goal of this project is to classify a collection of movie reviews, written in natural language, in either positive or negative sentiment.
 
 ### Main Technologies Used
 - Language: Python 
@@ -25,3 +25,17 @@ There is a textbox for an own movie review. After clicking on 'submit', the sent
 
 ### Docker Container
 A Dockerfile is stored in the [api](https://github.com/raffaelk/nlp-basics/tree/main/api) folder as well. It can be used to create a Docker image and run the application in a container.
+
+## Topic Classification of Newspaper Headlines
+In this multiclass classification problem, a set of newspaper headlines is classified into distinct topic categories. 
+
+### Main Technologies Used
+- Language: Python 
+- Visualization: Matplotlib, Seaborn
+- Analysis and Modelling: pandas, scikit-learn, NLTK
+
+### Data Analysis
+In the first part of the notebook [topic_classification.ipynb](https://github.com/raffaelk/nlp-basics/blob/main/topic_classification.ipynb) an extended data analysis was performed. With graphical and statistical tools it could be shown how the importance of certain topics and words evolved over time.
+
+### Model
+In the second part of the notebook [topic_classification.ipynb](https://github.com/raffaelk/nlp-basics/blob/main/topic_classification.ipynb) a predictive model to automatically classify headlines has been created. An accuracy of approximately 75% was acchieved.
