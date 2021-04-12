@@ -9,7 +9,7 @@ This project started as part of a semster assignment of the NLP course of Ryan C
 - Analysis and Modelling: pandas, scikit-learn, NLTK
 
 ## Data Analysis
-In the first part of the notebook [topic_classification.ipynb](topic_classification.ipynb) an extended data analysis was performed. With graphical and statistical tools it could be shown how the importance of certain topics and words evolved over time.
+In the first part of the notebook [topic_classification.ipynb](topic_classification.ipynb) (or [open with nbviewer](https://nbviewer.jupyter.org/github/raffaelk/nlp-basics/blob/main/topic_classification/topic_classification.ipynb)) an extended data analysis was performed. With graphical and statistical tools it could be shown how the importance of certain topics and words evolved over time.
 
 ## Model
-In the second part of the notebook [topic_classification.ipynb](topic_classification.ipynb) a predictive model to automatically classify headlines has been created. An accuracy of approximately 75% was achieved.
+In the second part of the notebook [topic_classification.ipynb](topic_classification.ipynb) (or [open with nbviewer](https://nbviewer.jupyter.org/github/raffaelk/nlp-basics/blob/main/topic_classification/topic_classification.ipynb)) a predictive model to automatically classify headlines has been created. An accuracy of approximately 75% was achieved.
