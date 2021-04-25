@@ -8,7 +8,7 @@ This project started as part of a semster assignment of the NLP course of Ryan C
 - Visualization: Matplotlib, wordcloud
 - Analysis and Modelling: pandas, scikit-learn, NLTK
 - Deployment: Flask, HTML, Docker
-- Set Up: Bash
+- Set-Up: Bash
 
 ## Model
 In the notebook [sentiment_classification.ipynb](sentiment_classification.ipynb) (or [open with nbviewer](https://nbviewer.jupyter.org/github/raffaelk/nlp-basics/blob/main/sentiment_classification/sentiment_classification.ipynb)) I compare a lexicon based approached to a discriminative classifier. The lexicon based approach simply counts negative and positive words, according to a sentiment dictionary. This leads to an accuracy of 68% on a test set. The discriminative model consists of a logistic regression model which has been trained on a training set an then evaluated on the same test set as the lexicon based approach. An accuracy of 85% is achieved.
