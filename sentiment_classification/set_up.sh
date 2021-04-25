@@ -8,7 +8,7 @@ tar -xzf review_polarity.tar.gz -C ./review_polarity
 # get opinion lexicon
 curl -O -L http://www.cs.uic.edu/~liub/FBS/opinion-lexicon-English.rar
 unrar x opinion-lexicon-English.rar
-mv opinion-lexicon-English opinion-lexicon
+mv opinion-lexicon-English opinion_lexicon
 
 # delete archives
 rm review_polarity.tar.gz
