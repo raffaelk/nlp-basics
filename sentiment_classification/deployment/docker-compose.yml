@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:   
+  model_logreg_api:
+    image: sentiment_pred_logreg
+    build: ./model_logreg
+    ports:
+      - 5000:5000
+
+
+      
