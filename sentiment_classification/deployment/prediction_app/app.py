@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import requests
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import os
 
 # env var for db connection
@@ -51,10 +51,10 @@ def index():
         response = requests.post('http://localhost:5001/predict', json=review).json()
         
         with ENGINE.connect() as con:
-            con.execute(f"""
+            con.execute(text(f"""
             INSERT INTO sentiment_app.predictions (review, prediction)
-            VALUES ('{review['review']}', '{response['prediction']}');
-            """)
+            VALUES (:rev, :pred);
+            """), rev=review['review'], pred=response['prediction'])
         
         return redirect('/')
         

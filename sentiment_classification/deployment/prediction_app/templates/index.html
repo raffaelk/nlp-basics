@@ -10,10 +10,22 @@
     
     <form action="/" method="POST">
         <p><textarea name="content" id="content" cols="50" rows="10">Review...</textarea></p>
-        <!-- <input type="text" name="content" id="content"> -->
         <p><input type="submit" value="submit"></p>      
     </form>
     
+    <h2>Predictions</h2>
+    <table>
+        <tr>
+            <th>LogReg Model:</th>
+            <td>{% if review_list|length != 0  %} {{ review_list[0][2] }} {% endif %}</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td></td>
+        </tr>
+    </table>
+    
+    <h2>Archive</h2>
     <table>
         <tr>
             <th>ID</th>
