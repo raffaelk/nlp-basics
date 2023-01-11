@@ -17,7 +17,18 @@
     <table>
         <tr>
             <th>LogReg Model:</th>
-            <td>{% if review_list|length != 0  %} {{ review_list[0][2] }} {% endif %}</td>
+            {% if review_list|length != 0  %}
+            
+                {% if review_list[0][2] == 'negative' %} 
+                <td style="background-color:#FF0000">
+                {% else %} 
+                <td style="background-color:#00FF00">
+                {% endif %}
+                {{ review_list[0][2] }} 
+                </td>
+            {% else %}
+            <td></td>            
+            {% endif %}
         </tr>
         <tr>
             <th></th>
@@ -25,7 +36,8 @@
         </tr>
     </table>
     
-    <h2>Archive</h2>
+    <h2>History</h2>
+    <a href="/history/clear">Clear History</a>
     <table>
         <tr>
             <th>ID</th>

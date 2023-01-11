@@ -69,6 +69,12 @@ def index():
         review_list = list(response)
         
         return render_template('index.html', review_list=review_list)
+    
+@app.route('/history/clear', methods=['GET'])
+def clear_history():
+    with ENGINE.connect() as con:
+        con.execute("TRUNCATE TABLE sentiment_app.predictions")
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
