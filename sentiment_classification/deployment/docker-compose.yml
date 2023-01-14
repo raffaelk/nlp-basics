@@ -18,6 +18,14 @@ services:
     networks:
       - sentiment_app
 
+  model_lex_api:
+    image: sentiment_pred_lex
+    build: ./model_lex
+    ports:
+      - 5002:5000
+    networks:
+      - sentiment_app
+
 networks:
   sentiment_app:
       
