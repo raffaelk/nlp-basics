@@ -60,7 +60,7 @@
             </tr>
             {% for review in review_list %}
             <tr>
-                <td>{{ review['review'] }}</td>
+                <td>{{ review['review_short'] }} {% if review['trunc'] %}... <a href="/expand/{{ review['id'] }}">[show]</a>{% endif %}</td>
                 <td>{{ review['prediction_lex'] }}</td>
                 <td>{{ review['prediction_logreg'] }}</td>
             </tr>

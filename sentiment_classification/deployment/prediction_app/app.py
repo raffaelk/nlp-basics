@@ -42,6 +42,8 @@ def set_up_database(mysql_user, mysql_password, mysql_host):
                 CREATE TABLE IF NOT EXISTS sentiment_app.predictions (
                     id INT AUTO_INCREMENT,
                     review TEXT,
+                    review_short VARCHAR(60),
+                    trunc BOOLEAN,
                     prediction_lex VARCHAR(10),
                     prediction_logreg VARCHAR(10),
                     PRIMARY KEY(ID)
@@ -71,6 +73,13 @@ def index():
         # get review text from input form
         review = {"review": request.form['content']}
         
+        if len(review['review']) > 60:
+            review_short = review['review'][:60]
+            trunc = True
+        else:
+            review_short = review['review']
+            trunc = False
+        
         # predict with lexicon model
         try:
             response_lex = requests.post('http://localhost:5002/predict', json=review).json()
@@ -89,9 +98,15 @@ def index():
         try:
             with ENGINE.connect() as con:
                 con.execute(text(f"""
-                INSERT INTO sentiment_app.predictions (review, prediction_lex, prediction_logreg)
-                VALUES (:rev, :pred_lex, :pred_logreg);
-                """), rev=review['review'], pred_lex=response_lex['prediction'], pred_logreg=response_logreg['prediction'])
+                INSERT INTO sentiment_app.predictions (review, review_short, trunc, prediction_lex, prediction_logreg)
+                VALUES (:rev, :rev_short, :trunc, :pred_lex, :pred_logreg);
+                """), 
+                            rev=review['review'],
+                            rev_short=review_short,
+                            trunc=trunc,
+                            pred_lex=response_lex['prediction'], 
+                            pred_logreg=response_logreg['prediction']
+                           )
         except:
             logger.error("Could not write predictions to the database.")
         
@@ -101,7 +116,7 @@ def index():
         try:
             with ENGINE.connect() as con:
                 response = con.execute("""
-                SELECT id, review, prediction_lex, prediction_logreg 
+                SELECT id, review, review_short, trunc, prediction_lex, prediction_logreg 
                 FROM sentiment_app.predictions
                 ORDER BY id DESC;
                 """)
@@ -122,6 +137,24 @@ def clear_history():
     except:
         logger.error("Could not clear history.")
     return redirect('/')
+
+@app.route('/expand/<id>', methods=['GET'])
+def expand_review(id):
+    
+    try:
+        with ENGINE.connect() as con:
+            response = con.execute(f"""
+            SELECT review
+            FROM sentiment_app.predictions
+            WHERE id = {id};
+            """)
+
+        text = next(response)[0]
+    except:
+        text = "Could not get the full text from the database."
+        logger.error(text)
+    
+    return render_template('full_review.html', text=text)
 
 if __name__ == "__main__":
     app.run(debug=True)
