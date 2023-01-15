@@ -16,41 +16,58 @@
     <h2>Predictions</h2>
     <table>
         <tr>
-            <th>LogReg Model:</th>
-            {% if review_list|length != 0  %}
-            
-                {% if review_list[0][2] == 'negative' %} 
+            <th>Lexicon Model:</th>            
+            {% if  request.args.get('lex')  == 'negative' %} 
                 <td style="background-color:#FF0000">
-                {% else %} 
+                {{  request.args.get('lex') }} 
+                </td>
+            {% elif request.args.get('lex')  == 'positive' %} 
                 <td style="background-color:#00FF00">
-                {% endif %}
-                {{ review_list[0][2] }} 
+                {{  request.args.get('lex') }} 
                 </td>
             {% else %}
-            <td></td>            
+                <td>
+                {{  request.args.get('lex') }}
+                </td>
             {% endif %}
         </tr>
         <tr>
-            <th></th>
-            <td></td>
+            <th>LogReg Model:</th>            
+            {% if  request.args.get('logreg')  == 'negative' %} 
+                <td style="background-color:#FF0000">
+                {{  request.args.get('logreg') }} 
+                </td>
+            {% elif request.args.get('logreg')  == 'positive' %} 
+                <td style="background-color:#00FF00">
+                {{  request.args.get('logreg') }} 
+                </td>
+            {% else %}
+                <td>
+                {{  request.args.get('logreg') }} 
+                </td>
+            {% endif %}
         </tr>
     </table>
     
     <h2>History</h2>
-    <a href="/history/clear">Clear History</a>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Review</th>
-            <th>Prediction</th>
-        </tr>
-        {% for review in review_list %}
-        <tr>
-            <td>{{ review[0] }}</td>
-            <td>{{ review[1] }}</td>
-            <td>{{ review[2] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% if histo_db %}
+        <a href="/history/clear">Clear History</a>
+        <table>
+            <tr>
+                <th>Review</th>
+                <th>Lexicon</th>
+                <th>LogReg</th>
+            </tr>
+            {% for review in review_list %}
+            <tr>
+                <td>{{ review['review'] }}</td>
+                <td>{{ review['prediction_lex'] }}</td>
+                <td>{{ review['prediction_logreg'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        Could not connect to the database...
+    {% endif %}
 </div>
 {% endblock %}
