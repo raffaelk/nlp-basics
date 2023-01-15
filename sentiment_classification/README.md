@@ -7,7 +7,7 @@ This project started as part of a semster assignment of the NLP course of Ryan C
 - Language: Python 
 - Visualization: Matplotlib, wordcloud
 - Analysis and Modelling: pandas, scikit-learn, NLTK
-- Deployment: Flask, HTML, Docker
+- Deployment: Flask, SQL, HTML, Docker
 - Set-Up: Bash
 
 ## Model
@@ -15,15 +15,12 @@ In the notebook [sentiment_classification.ipynb](sentiment_classification.ipynb)
 
 To get all the data sets either follow the instructions in the notebook or run the bash script [set_up.sh](set_up.sh).
 
-## Flask API/GUI
-To productionize the logistic regression model, I built a simple flask API/GUI which can be accessed with a web browser. To use it, run the following steps:
-- copy the content of the [api](api) folder
-- create a new virtual environment
-- install the dependencies with `pip install -r requirements.txt`
-- run the api script: `python api_app.py`
+## APIs and Containerized App
+To deploy the models, I built a simple application running in multiple docker containers communicating over REST-APIs and orchestrated with docker-compose. To start it, run the following steps:
+- install [docker](https://www.docker.com/)
+- copy the content of the [deployment](deployment) folder
+- run `$ docker-compose up -d --build` in a terminal
 - go to http://localhost:5000/ in a webbrowser
 
-There is a text box for an own movie review. After clicking on 'submit', the sentiment of the text will be predicted. As a test case real one and five star reviews from amazon can be evaluated. The underlying prediction model is fairly simple, so it is also easy to trick it into giving a false prediction. As only unigrams have been used, the model is not capable of analyzing the context of important words. E.g. the sentences *"The movie was not good."* and *"The movie was good."* will both be labelled as positive.
+There is a text box for an own movie review. After clicking on 'submit', the sentiment of the text will be predicted. As a test case real one and five star reviews from amazon can be evaluated. The underlying prediction models are fairly simple, so it is also easy to trick it into giving a false prediction. As only unigrams have been used, the model is not capable of analyzing the context of important words. E.g. the sentences *"The movie was not good."* and *"The movie was good."* will both be labelled as positive.
 
-## Docker Container
-A Dockerfile is stored in the [api](api) folder as well. It can be used to create a Docker image and run the application in a container.
