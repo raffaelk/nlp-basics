@@ -13,15 +13,14 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s:%(message)s',
 logger = logging.getLogger()
 
 # env var for db connection
-MYSQL_USER = os.environ.get('MYSQL_USER') #'root'
-MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD') #'secret'
-MYSQL_HOST = os.environ.get('MYSQL_HOST') #'localhost'
+MYSQL_USER = os.environ.get('MYSQL_USER') 
+MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD') 
+MYSQL_HOST = os.environ.get('MYSQL_HOST') 
 
-##################################################
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'secret'
-MYSQL_HOST = 'localhost'
-###################################################
+# connection to models
+URL_MODEL_LEX = os.environ.get('URL_MODEL_LEX')
+URL_MODEL_LOGREG = os.environ.get('URL_MODEL_LOGREG')
+
 
 def set_up_database(mysql_user, mysql_password, mysql_host):
     """
@@ -82,14 +81,14 @@ def index():
         
         # predict with lexicon model
         try:
-            response_lex = requests.post('http://localhost:5002/predict', json=review).json()
+            response_lex = requests.post(f'http://{URL_MODEL_LEX}/predict', json=review).json()
         except:
             response_lex = {"prediction": "error"}
             logging.error("No response from lexicon model.")
         
         # predict with logreg model
         try:
-            response_logreg = requests.post('http://localhost:5001/predict', json=review).json()
+            response_logreg = requests.post(f'http://{URL_MODEL_LOGREG}/predict', json=review).json()
         except:
             response_logreg = {"prediction": "error"}
             logging.error("No response from logreg model.")
@@ -157,4 +156,4 @@ def expand_review(id):
     return render_template('full_review.html', text=text)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

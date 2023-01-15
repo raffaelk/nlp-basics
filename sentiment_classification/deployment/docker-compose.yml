@@ -1,10 +1,29 @@
 version: "3.8"
 
-services:   
+services:
+  prediction_app:
+    image: sentiment_prediction_app
+    build: ./prediction_app
+    depends_on:
+      - mysql_db
+    ports:
+      - 5000:5000
+    restart: always
+    environment:
+      LOG_LEVEL: INFO
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_HOST: mysql_db
+      URL_MODEL_LEX: model_lex_api:5000
+      URL_MODEL_LOGREG: model_logreg_api:5000 
+    networks:
+      - sentiment_app
+
   mysql_db:
     image: mysql:5.7
-    ports:
-      - 3306:3306
+    volumes:
+      - mysqlvolume:/var/lib/mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
     networks:
@@ -13,21 +32,23 @@ services:
   model_logreg_api:
     image: sentiment_pred_logreg
     build: ./model_logreg
-    ports:
-      - 5001:5000
+    restart: always
     networks:
       - sentiment_app
 
   model_lex_api:
     image: sentiment_pred_lex
     build: ./model_lex
-    ports:
-      - 5002:5000
+    restart: always
     networks:
       - sentiment_app
 
+volumes:
+  mysqlvolume:
+
 networks:
   sentiment_app:
+
       
 
 
