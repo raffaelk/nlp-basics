@@ -1,4 +1,4 @@
-# Sentiment Classification of Movie Reviews
+# Sentiment Classification of Movie Reviews & Deployment with Docker
 The goal of this project is to classify a collection of movie reviews, written in natural language, in either positive or negative sentiment.
 
 This project started as part of a semster assignment of the NLP course of Ryan Cotterell at ETH Zürich. The code for my original hand-in is in a separate [repo](https://github.com/raffaelk/NLP20_Assignment). Here I present an extended version of the original tasks, with some added features and documentation.
